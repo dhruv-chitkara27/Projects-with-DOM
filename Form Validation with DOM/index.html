@@ -1,0 +1,103 @@
+<head>
+  <style>
+    body {
+      padding: 40px;
+      font-family: Arial;
+    }
+    .container {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      padding: 10px;
+      width: 200px;
+      height: 300px;
+      border: thick solid #9900ff;
+      background-color: #00ffaa;
+    }
+    .textInput {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    #petSelection {
+      margin-top: 10px;
+      display: none;
+    }
+    #saveButton {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      background-color: #9900ff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class='container'>
+    <form id='saveForm'>
+      Name: <br><input class='textInput' type='text'><br>
+      Address: <br><input class='textInput' type='text'><br>
+      Age: <br><input class='textInput' type='text'><br>
+      Pets: <br><input id='petCheckbox' type='checkbox'><br>
+      <div id='petSelection'>
+        Pet: <br><select>
+          <option value='Dog'>Dog</option>
+          <option value='Cat'>Cat</option>
+          <option value='Bird'>Bird</option>
+          <option value='Other'>Other</option>
+        </select><br>
+      </div>
+      <br><input id='saveButton' type='submit' value='Save'>
+    </form>
+  </div>
+
+  <script type="text/javascript">
+    var checkbox = document.getElementById('petCheckbox');
+    var selectionDiv = document.getElementById('petSelection');
+    checkbox.addEventListener('change',function(event) {
+      if(checkbox.checked == true) {
+        selectionDiv.style.display  = 'Block';
+      }
+      else {
+        selectionDiv.style.display = 'None';
+      }
+    });
+
+    var saveForm = document.getElementById('saveForm');
+    saveForm.addEventListener('submit',function(event) {
+      event.preventDefault();
+      var nameText = saveForm.elements[0].value;
+      var addressText = saveForm.elements[1].value;
+      var ageText = saveForm.elements[2].value;
+      var doesHavePets = saveForm.elements[3].checked;
+      var petText = 'No pets';
+      if (nameText == '') {
+        alert('Please enter a name');
+        return;
+      }
+      if (addressText == '') {
+        alert('Please enter an address');
+        return;
+      }
+      if (ageText == '') {
+        alert('Please enter an age');
+        return;
+      }
+      if (doesHavePets) {
+        petText = saveForm.elements[4].value;
+      }
+      if (petText == 'Dog') {
+        alert('Sorry, our dog capacity is full :(');
+        return;
+      }
+       alert('Booking saved! Info:\n' +
+        nameText + '\n' +
+        addressText + '\n' +
+        ageText + '\n' +
+        petText
+      );
+    })
+  </script>
+  </body>
